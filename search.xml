@@ -5,8 +5,8 @@
     
     <entry>
       <title>Hello,World</title>
-      <link href="/2019/05/21/Hello-Hexo/"/>
-      <url>/2019/05/21/Hello-Hexo/</url>
+      <link href="/2019/05/21/Hello-World/"/>
+      <url>/2019/05/21/Hello-World/</url>
       
         <content type="html"><![CDATA[<p>不止一次，想找个地方记录一下自己想法，记一下学习笔记。可是懒得搞博客，主要是找不到好看的主题，而且总想搞得完美一点儿，所以就一直拖着。最近又把这个烂摊子捡起来，找到个还算能看的主题，先上线再迭代吧:)</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Hello,world!"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       
