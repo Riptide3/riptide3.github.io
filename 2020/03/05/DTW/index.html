@@ -14,24 +14,24 @@
   </script>
   <meta charset="utf-8">
   
-  <title>DTW | Blog</title>
+  <title>DTW | NGRWYZZDD&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="DTW（动态时间规整）简介DTW能够衡量两个序列的相似程度或者说两个序列的距离，同时DTW能够对两个序列的延展或者压缩有一定的适应性。该算法最早用于语音识别方面，由于它能够解决很多离散时间序列匹配的问题，在视频动作识别，生物信息比对等等诸多领域都有应用。 例如下图，有两个呈现正弦规律的序列，其中蓝色序列是稍微被拉长了。即使这两个序列不重合，但是我们也可以有把握说这两个序列的相似程度很高（或者说这两">
 <meta name="keywords" content="algorithm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DTW">
 <meta property="og:url" content="http://ngrwyzzdd.github.io/2020/03/05/DTW/index.html">
-<meta property="og:site_name" content="Blog">
+<meta property="og:site_name" content="NGRWYZZDD&#39;s Blog">
 <meta property="og:description" content="DTW（动态时间规整）简介DTW能够衡量两个序列的相似程度或者说两个序列的距离，同时DTW能够对两个序列的延展或者压缩有一定的适应性。该算法最早用于语音识别方面，由于它能够解决很多离散时间序列匹配的问题，在视频动作识别，生物信息比对等等诸多领域都有应用。 例如下图，有两个呈现正弦规律的序列，其中蓝色序列是稍微被拉长了。即使这两个序列不重合，但是我们也可以有把握说这两个序列的相似程度很高（或者说这两">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://ngrwyzzdd.github.io/2020/03/05/DTW/blog/source/_posts/DTW/two%20waves.jpg">
-<meta property="og:image" content="http://ngrwyzzdd.github.io/2020/03/05/DTW/blog/source/_posts/DTW/warping.jpg">
-<meta property="og:image" content="http://ngrwyzzdd.github.io/2020/03/05/DTW/blog/source/_posts/DTW/dtwd&dtwi.png">
-<meta property="og:updated_time" content="2020-03-05T03:12:06.858Z">
+<meta property="og:image" content="http://ngrwyzzdd.github.io/2020/03/05/DTW/two%20waves.jpg">
+<meta property="og:image" content="http://ngrwyzzdd.github.io/2020/03/05/DTW/warping.jpg">
+<meta property="og:image" content="http://ngrwyzzdd.github.io/2020/03/05/DTW/dtwd&dtwi.png">
+<meta property="og:updated_time" content="2020-03-11T07:19:58.010Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DTW">
 <meta name="twitter:description" content="DTW（动态时间规整）简介DTW能够衡量两个序列的相似程度或者说两个序列的距离，同时DTW能够对两个序列的延展或者压缩有一定的适应性。该算法最早用于语音识别方面，由于它能够解决很多离散时间序列匹配的问题，在视频动作识别，生物信息比对等等诸多领域都有应用。 例如下图，有两个呈现正弦规律的序列，其中蓝色序列是稍微被拉长了。即使这两个序列不重合，但是我们也可以有把握说这两个序列的相似程度很高（或者说这两">
-<meta name="twitter:image" content="http://ngrwyzzdd.github.io/2020/03/05/DTW/blog/source/_posts/DTW/two%20waves.jpg">
+<meta name="twitter:image" content="http://ngrwyzzdd.github.io/2020/03/05/DTW/two%20waves.jpg">
   
     <link rel="icon" href="/img/favicon.ico">
   
@@ -94,9 +94,9 @@
   <article class="content">
     <h1 id="DTW（动态时间规整）"><a href="#DTW（动态时间规整）" class="headerlink" title="DTW（动态时间规整）"></a>DTW（动态时间规整）</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>DTW能够衡量两个序列的相似程度或者说<strong>两个序列的距离</strong>，同时DTW能够对两个序列的延展或者压缩有一定的适应性。该算法最早用于语音识别方面，由于它能够解决很多离散时间序列匹配的问题，在视频动作识别，生物信息比对等等诸多领域都有应用。</p>
 <p>例如下图，有两个呈现正弦规律的序列，其中蓝色序列是稍微被拉长了。即使这两个序列不重合，但是我们也可以有把握说这两个序列的相似程度很高（或者说这两个序列的距离很小）。</p>
-<p><img src="/2020/03/05/DTW/blog\source\_posts\DTW\two waves.jpg" alt="two waves"></p>
+<p><img src="/2020/03/05/DTW/two waves.jpg" alt="two waves"></p>
 <p>DTW能够计算这两个序列的相似程度，并且给两个序列之间的最短距离。</p>
-<p><img src="/2020/03/05/DTW/blog\source\_posts\DTW\warping.jpg" alt="warping"></p>
+<p><img src="/2020/03/05/DTW/warping.jpg" alt="warping"></p>
 <p>我们把这种“可以把序列某个时刻的点跟另一个时刻多个连续时刻的点相对应”的做法称为时间规整（Time Warping）。</p>
 <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>假设给定两个序列，样本序列$X=\left(x_{1}, \dots, x_{N}\right)$和测试序列$Y=\left(y_{1}, \dots, y_{N}\right)$，同时给定义个序列中点到点的距离函数$d(i, j)=f\left(x_{i}, y_{j}\right) \geq 0$（一般为欧氏距离）。根据两个序列点与点之间的距离我们可以获得一个如下的距离矩阵$M$，在此我们假设$X：3,5,6,7,7,1$，$Y：3,6,6,7,8,1,1$</p>
 <div class="table-container">
@@ -272,7 +272,7 @@ d_{\phi}(X, Y)=\sum_{k=1}^{T} d\left(\phi_{x}(k), \phi_{y}(k)\right)</script><p>
 <script type="math/tex; mode=display">
 D T W(X, Y)=\min _{\phi} d_{\phi}(X, Y)</script><p>也就是在距离矩阵上寻找一条从左下角到右上角的路径，使得路径经过的元素值之和最小，在DTW算法中我们使用动态规划来解决这个问题。</p>
 <h2 id="两种原始方法-DTW-d-和-DTW-i"><a href="#两种原始方法-DTW-d-和-DTW-i" class="headerlink" title="两种原始方法$DTW_d$和$DTW_i$"></a>两种原始方法$DTW_d$和$DTW_i$</h2><p>令$Q$为多元时间序列矩阵，该时间序列共有n个变量，即有n列，每一列维度为m，再令$C$为另一个多元时间序列，有n个变量，每一列维度为l，m和l不一定相等。</p>
-<p><img src="/2020/03/05/DTW/blog\source\_posts\DTW\dtwd&amp;dtwi.png" alt="dtwd&amp;dtwi"></p>
+<p><img src="/2020/03/05/DTW/dtwd&amp;dtwi.png" alt="dtwd&amp;dtwi"></p>
 <p>$DTW_d$计算时将所有维度集中在一起进行计算，$DTW_i$计算时分别计算每个维度的DTW值再将其相加。</p>
 <h2 id="约束条件"><a href="#约束条件" class="headerlink" title="约束条件"></a>约束条件</h2><p>路径的寻找不是任意的，一般来说有三个约束条件：</p>
 <ol>
